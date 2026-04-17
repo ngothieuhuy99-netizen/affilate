@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cổng Ứng Tuyển Công Ty</title>
+    <!-- Google Fonts: Roboto & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+        <header class="form-header">
+            <h1 class="glow-text">Bắt đầu hành trình mới</h1>
+            <p>Vui lòng điền thông tin và đính kèm CV (PDF/DOC) để ứng tuyển.</p>
+        </header>
+
+        <form id="recruitment-form" class="glass-form">
+            <div class="form-group grid-2">
+                <div class="input-wrapper">
+                    <input type="text" id="fullName" name="fullName" required placeholder=" ">
+                    <label for="fullName">Họ và Tên (*)</label>
+                </div>
+                <div class="input-wrapper">
+                    <input type="tel" id="phone" name="phone" required placeholder=" ">
+                    <label for="phone">Số điện thoại (*)</label>
+                </div>
+            </div>
+
+            <div class="form-group grid-2">
+                <div class="input-wrapper">
+                    <input type="email" id="email" name="email" required placeholder=" ">
+                    <label for="email">Email (*)</label>
+                </div>
+                <div class="input-wrapper select-wrapper">
+                    <select id="position" name="position" required>
+                        <option value="" disabled selected>-- Chọn vị trí --</option>
+                        <option value="MKT">Nhân viên Marketing</option>
+                        <option value="DEV">Lập trình viên</option>
+                        <option value="SALE">Nhân viên Sale (Kinh doanh)</option>
+                        <option value="HR">Hành chính - Nhân sự</option>
+                        <option value="OTHER">Vị trí khác</option>
+                    </select>
+                    <!-- <label for="position" class="floating-label">Vị trí ứng tuyển (*)</label> -->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <textarea id="message" name="message" rows="3" placeholder=" "></textarea>
+                    <label for="message">Lời nhắn cho nhà tuyển dụng (không bắt buộc)</label>
+                </div>
+            </div>
+
+            <div class="form-group file-upload-wrapper">
+                <div class="upload-area" id="uploadFileArea">
+                    <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    <span id="fileNameDisplay">Kéo thả hoặc Nhấp để chọn CV (*)</span>
+                    <span class="file-hint">Hỗ trợ: .pdf, .docx, .doc (Tối đa 5MB)</span>
+                    <input type="file" id="cvFile" name="cvFile" accept=".pdf, .doc, .docx" required>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="submit-btn">
+                <span class="btn-text">Gửi Hồ Sơ</span>
+                <span class="loader hidden"></span>
+            </button>
+            <p id="formMessage" class="form-feedback"></p>
+        </form>
+    </main>
+
+    <!-- Zalo Float Widget -->
+    <a id="zaloWidget" class="zalo-float" href="#" target="_blank" rel="noopener noreferrer">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/1024px-Icon_of_Zalo.svg.png" alt="Chat Zalo">
+        <span class="zalo-tooltip">Chat với HR</span>
+    </a>
+
+    <script src="app.js"></script>
+</body>
+</html>

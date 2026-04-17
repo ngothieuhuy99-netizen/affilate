@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển hướng Tuyển dụng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-light: #3B82F6;
+            --bg-main: #f1f5f9;
+            --text-main: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            text-align: center;
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            padding: 3rem;
+            border-radius: 1.5rem;
+            max-width: 500px;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        p {
+            color: #475569;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .start-btn:active {
+            transform: translateY(0);
+        }
+
+        .loader {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="welcome-card" id="cardContent">
+        <div class="loader" id="loadingIcon"></div>
+        <h1 id="titleText">Đang tải dữ liệu...</h1>
+        <p id="descText">Vui lòng chờ trong giây lát để chúng tôi chuẩn bị không gian cho bạn.</p>
+        <button class="start-btn" id="startBtn" style="display: none;">Bắt đầu ứng tuyển ngay</button>
+    </div>
+
+    <script>
+        // THAY THẾ bằng GAS Web App URL thực tế của bạn
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbxtskvOfmPZvlcqoiVTjYXatzbTelGF3Gn0jQ9gQ0Dm5DX888BcpqyCBWB04xoSeUEHoA/exec";
+        let affiliateUrl = "https://google.com"; // Default fallback
+
+        async function init() {
+            try {
+                if (GAS_API_URL !== "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") {
+                    const res = await fetch(GAS_API_URL);
+                    const result = await res.json();
+                    if (result.status === "success" && result.data.affiliate) {
+                        affiliateUrl = result.data.affiliate;
+                    }
+                }
+            } catch (e) {
+                console.error("Could not fetch affiliate URL, using fallback.");
+            }
+
+            // Show Button
+            document.getElementById("loadingIcon").style.display = "none";
+            document.getElementById("titleText").textContent = "Chào mừng bạn!";
+            document.getElementById("descText").textContent = "Bấm nút bên dưới để mở Form ứng tuyển (tab hiện tại) và khám chuyển đến trang thông tin bổ sung (tab mới).";
+
+            const btn = document.getElementById("startBtn");
+            btn.style.display = "inline-block";
+
+            btn.addEventListener("click", () => {
+                // Mở trang Affiliate ở tab mới
+                window.open(affiliateUrl, '_blank');
+                // Chuyển tab hiện tại sang trang form tuyển dụng
+                window.location.href = "index.html";
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", init);
+    </script>
+</body>
+
+</html>

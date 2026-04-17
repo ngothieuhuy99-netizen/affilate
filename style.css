@@ -1,0 +1,344 @@
+:root {
+    /* Color Palette - Professional Light & Glass */
+    --primary: #2563eb;          /* Royal Blue */
+    --primary-light: #3b82f6;    /* Bright Blue */
+    --primary-glow: rgba(59, 130, 246, 0.3);
+    --secondary: #059669;        /* Emerald Green (Success) */
+    
+    --bg-main: #f1f5f9;          /* Slate 100 - Light gray */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    
+    --text-main: #0f172a;        /* Slate 900 - Dark Text */
+    --text-muted: #475569;       /* Slate 600 */
+    
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --zalo-color: #0068ff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- Main Layout --- */
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+    z-index: 10;
+}
+
+/* Header */
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeDown 1s ease-out;
+}
+.glow-text {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #0f172a, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.form-header p {
+    color: var(--text-muted);
+}
+
+/* --- Glassmorphism Form --- */
+.glass-form {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+    animation: fadeUp 1s ease-out;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .glass-form {
+        padding: 1.5rem;
+    }
+}
+
+/* Floating Input Aesthetics */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+}
+.input-wrapper input,
+.input-wrapper textarea {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid rgba(0,0,0,0.1);
+    color: var(--text-main);
+    padding: 1rem 1.2rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+    resize: none;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+.input-wrapper input:focus,
+.input-wrapper textarea:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+    background: #ffffff;
+}
+
+.input-wrapper label {
+    position: absolute;
+    top: 50%;
+    left: 1.2rem;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: transparent; /* Changed from dark */
+    padding: 0 0.25rem;
+    border-radius: 4px;
+}
+textarea ~ label {
+    top: 1rem;
+    transform: none;
+}
+
+/* Magic: Float Label on Focus or when not empty */
+.input-wrapper input:focus ~ label,
+.input-wrapper input:not(:placeholder-shown) ~ label,
+.input-wrapper textarea:focus ~ label,
+.input-wrapper textarea:not(:placeholder-shown) ~ label {
+    top: 0;
+    transform: translateY(-50%) scale(0.85);
+    color: var(--primary);
+    background-color: #ffffff;
+    font-weight: 600;
+}
+
+/* Select Field */
+.select-wrapper {
+    flex-direction: column; 
+}
+select {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid rgba(0,0,0,0.1);
+    color: var(--text-main);
+    padding: 1rem 1.2rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    outline: none;
+    appearance: none; 
+    cursor: pointer;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    /* Darker arrow for light theme */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.2rem top 50%;
+    background-size: 0.65rem auto;
+}
+select:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+    background-color: #ffffff;
+}
+select option {
+    background-color: #ffffff;
+    color: var(--text-main);
+}
+
+/* File Upload Area */
+.upload-area {
+    position: relative;
+    border: 2px dashed rgba(37, 99, 235, 0.4);
+    border-radius: 0.75rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(37, 99, 235, 0.03);
+    transition: all 0.3s ease;
+}
+.upload-area:hover, .upload-area.dragover {
+    background: rgba(37, 99, 235, 0.08);
+    border-color: var(--primary);
+}
+.upload-area input[type="file"] {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.upload-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+#fileNameDisplay {
+    display: block;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+.file-hint {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 1.1rem;
+    background: linear-gradient(to right, var(--primary), var(--primary-light));
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+.submit-btn:active {
+    transform: translateY(0);
+}
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Loader */
+.loader {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+}
+.hidden { display: none !important; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Feedback Messages */
+.form-feedback {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.form-feedback.success {
+    color: var(--secondary);
+    opacity: 1;
+}
+.form-feedback.error {
+    color: #dc2626; /* Deep Red */
+    opacity: 1;
+}
+
+/* --- Zalo Float --- */
+.zalo-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(0, 104, 255, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    text-decoration: none;
+    animation: pulse 2s infinite;
+    transition: transform 0.3s;
+    opacity: 0;
+}
+.zalo-float img {
+    width: 35px;
+    height: 35px;
+}
+.zalo-float:hover {
+    transform: scale(1.1);
+}
+.zalo-tooltip {
+    position: absolute;
+    right: 75px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.zalo-float:hover .zalo-tooltip {
+    opacity: 1;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 104, 255, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(0, 104, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 104, 255, 0); }
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
